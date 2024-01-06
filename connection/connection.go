@@ -10,17 +10,15 @@ import (
 ) 
 
 var DB *sql.DB 
-func Connect() { 
+func ConnectToDB() { 
   err := godotenv.Load() 
   if err != nil { panic(err) } 
 
   sb := strings.Builder{}
 
-  sb.WriteString(os.Getenv("DB_USER") + ":")
-  sb.WriteString(os.Getenv("DB_PASSWORD") + "@")
-  sb.WriteString(os.Getenv("DB_SERVER") + ":")
-  sb.WriteString(os.Getenv("DB_PORT") + "/")
-  sb.WriteString(os.Getenv("DB_NAME"))
+  sb.WriteString("user="+ os.Getenv("DB_USER") + " ")
+  sb.WriteString("dbname=" + os.Getenv("DB_NAME") + " ")
+  sb.WriteString("sslmode=" + os.Getenv("SSLMode"))
   
   connection, err := sql.Open("postgres", sb.String())
 
@@ -30,7 +28,7 @@ func Connect() {
   DB = connection;
 }
 
-func CloseConnection()  {
+func CloseConnectionToDB()  {
   err := DB.Close()
   
   if err != nil { panic(err) }
