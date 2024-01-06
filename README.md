@@ -12,4 +12,4 @@ The dependencies needed to run this program are:
 
 After you install the dependencies, the command to run this code is:
 
-go run .
+- go run .
